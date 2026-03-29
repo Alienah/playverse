@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cn } from "@/app/utils/cn";
 import Link, { type LinkProps } from "next/link";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 
@@ -18,7 +18,7 @@ export default function CardLink({
   return (
     <Link
       {...props}
-      className={clsx(
+      className={cn(
         "pointer-events-auto inline-flex items-center rounded-4 outline-none",
         "transition-[color] duration-150",
         "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",

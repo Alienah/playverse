@@ -1,8 +1,8 @@
-import clsx from "clsx";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import type { ComponentProps, ReactNode } from "react";
 import CardLink from "./CardLink";
+import { cn } from "@/app/utils/cn";
 
 type FeatureCardProps = {
   children: ReactNode;
@@ -22,7 +22,7 @@ export default function FeatureCard(props: FeatureCardProps) {
 
   return (
     <article
-      className={clsx(
+      className={cn(
         "group relative flex flex-col overflow-hidden rounded-24 border border-border-soft bg-surface shadow-sm",
         "transition-[background-color,border-color,box-shadow] duration-150",
         "hover:bg-background-soft/40 hover:border-text-muted hover:shadow-md",
@@ -51,7 +51,7 @@ export default function FeatureCard(props: FeatureCardProps) {
             <CardLink
               {...link}
               stretched
-              className={clsx(
+              className={cn(
                 "text-text-primary group-hover:text-layer",
                 link.className,
               )}
