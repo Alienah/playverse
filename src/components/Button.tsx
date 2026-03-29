@@ -1,5 +1,5 @@
-import { cn } from "@/app/utils/cn";
 import { Slot } from "@radix-ui/react-slot";
+import clsx from "clsx";
 
 import type { ComponentProps } from "react";
 
@@ -20,7 +20,7 @@ export default function Button({
 
   return (
     <Comp
-      className={cn(
+      className={clsx(
         "inline-flex items-center justify-center gap-8 rounded outline-none transition duration-150 disabled:pointer-events-none disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
 
         // 🎯 KIND
@@ -35,8 +35,8 @@ export default function Button({
 
         // 📏 SIZE
         {
-          "px-12 py-8 text-compact-02": size === "sm",
-          "px-24 py-12 text-compact-01": size === "md",
+          "px-16 py-4 text-body-02": size === "sm",
+          "px-24 py-8 text-body-01": size === "md",
           "h-40 w-40": size === "icon",
         },
 

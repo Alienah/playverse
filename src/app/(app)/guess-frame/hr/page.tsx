@@ -4,6 +4,7 @@ import { Progress } from "@/components/Progress";
 import { Checkbox } from "@/components/Checkbox";
 import { Expand, Play } from "lucide-react";
 import Button from "@/components/Button";
+import Tag from "@/components/Tag";
 
 const totalChallenges = 4;
 const completedChallenges = 1;
@@ -74,17 +75,9 @@ export default function HeatedRivalryPage() {
             <div>
               <div className="flex flex-col gap-16">
                 <div className="flex flex-wrap items-center gap-8">
-                  <span className="rounded-full bg-background px-12 py-8 text-compact-02 text-text-muted">
-                    Prueba activa
-                  </span>
-
-                  <span className="rounded-full bg-background px-12 py-8 text-compact-02 text-text-muted">
-                    Pendiente
-                  </span>
-
-                  <span className="rounded-full bg-background px-12 py-8 text-compact-02 text-text-muted">
-                    Medium · 2 puntos
-                  </span>
+                  <Tag tone="active">Prueba activa</Tag>
+                  <Tag tone="subtle">Pendiente</Tag>
+                  <Tag tone="warning">Medium · 2 puntos</Tag>
                 </div>
 
                 <div className="flex flex-col gap-8">
@@ -191,9 +184,7 @@ export default function HeatedRivalryPage() {
                 <div className="flex items-center justify-between gap-12">
                   <p className="text-compact-01 text-text-primary">Prueba 01</p>
 
-                  <span className="rounded-full bg-accent px-12 py-8 text-compact-02 text-text-primary">
-                    Activa
-                  </span>
+                  <Tag tone="active">Activa</Tag>
                 </div>
               </button>
             </li>
@@ -206,9 +197,7 @@ export default function HeatedRivalryPage() {
                 <div className="flex items-center justify-between gap-12">
                   <p className="text-compact-01 text-text-primary">Prueba 02</p>
 
-                  <span className="rounded-full bg-background-soft px-12 py-8 text-compact-02 text-text-muted">
-                    Pendiente
-                  </span>
+                  <Tag tone="subtle">Pendiente</Tag>
                 </div>
               </button>
             </li>
@@ -221,9 +210,7 @@ export default function HeatedRivalryPage() {
                 <div className="flex items-center justify-between gap-12">
                   <p className="text-compact-01 text-text-primary">Prueba 03</p>
 
-                  <span className="rounded-full bg-background-soft px-12 py-8 text-compact-02 text-text-muted">
-                    Pendiente
-                  </span>
+                  <Tag tone="subtle">Pendiente</Tag>
                 </div>
               </button>
             </li>
@@ -236,9 +223,7 @@ export default function HeatedRivalryPage() {
                 <div className="flex items-center justify-between gap-12">
                   <p className="text-compact-01 text-text-primary">Prueba 04</p>
 
-                  <span className="rounded-full bg-background-soft px-12 py-8 text-compact-02 text-text-muted">
-                    Pendiente
-                  </span>
+                  <Tag tone="subtle">Pendiente</Tag>
                 </div>
               </button>
             </li>

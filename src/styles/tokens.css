@@ -12,6 +12,27 @@
   --color-text-muted: #62839b;
   --color-surface: rgb(255 255 255 / 0.7);
 
+  /* Tags */
+  --color-tag-subtle-bg: #d6dee6;
+  --color-tag-subtle-text: #4f6475;
+  --color-tag-subtle-border: #b8c6d1;
+
+  --color-tag-active-bg: #a9d3ec;
+  --color-tag-active-text: #184a66;
+  --color-tag-active-border: #7fb8d8;
+
+  --color-tag-success-bg: #ccebd6;
+  --color-tag-success-text: #1f6f4a;
+  --color-tag-success-border: #9ed8b5;
+
+  --color-tag-warning-bg: #f6dfb2;
+  --color-tag-warning-text: #8a5a00;
+  --color-tag-warning-border: #e7c27a;
+
+  --color-tag-inverse-bg: #0f172a;
+  --color-tag-inverse-text: #bfe1f3;
+  --color-tag-inverse-border: #1e293b;
+
   /* Typography */
   --text-heading-01: 3rem;
   --text-heading-01--line-height: 1.05;
