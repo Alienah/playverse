@@ -18,18 +18,8 @@ export function useChallengeParam(defaultId: string) {
     });
   }
 
-  function resetChallenge(id: string) {
-    const params = new URLSearchParams();
-    params.set("challenge", id);
-
-    router.replace(`${pathname}?${params.toString()}`, {
-      scroll: false,
-    });
-  }
-
   return {
     challengeId,
     setChallengeId,
-    resetChallenge,
   };
 }

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Panel from "@/components/Panel";
 import {
@@ -116,6 +116,13 @@ function CurrentChallengeAudio(props: CurrentChallengeAudioProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const challengeId = challenge.id;
   const { markChallengeAsListened } = useGame();
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.load();
+  }, [challengeId]);
 
   async function handleToggleAudio() {
     const audio = audioRef?.current;

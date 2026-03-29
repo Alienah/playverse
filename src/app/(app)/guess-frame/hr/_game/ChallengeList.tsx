@@ -17,14 +17,12 @@ type Props = {
 
 export function ChallengeList({ challenges, challengeId }: Props) {
   const { listenedIds, revealedIds, resetGameState } = useGame();
-  const { setChallengeId, resetChallenge } = useChallengeParam(
-    challenges[0]?.id ?? "",
-  );
+  const { setChallengeId } = useChallengeParam(challenges[0]?.id ?? "");
 
   function handleReset() {
     const firstId = challenges[0]?.id ?? "";
     resetGameState();
-    resetChallenge(firstId);
+    setChallengeId(firstId);
   }
 
   return (
