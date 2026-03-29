@@ -9,6 +9,7 @@ import { useGame } from "./GameContext";
 import { useChallengeParam } from "./useChallengeParam";
 import { getChallengeTitle } from "./challengeUtils";
 import { Challenge } from "../types";
+import type { ComponentProps } from "react";
 
 type Props = {
   challenges: Challenge[];
@@ -49,38 +50,71 @@ export function ChallengeList({ challenges, challengeId }: Props) {
 
             return (
               <li key={challenge.id}>
-                <button
-                  type="button"
+                <ChallengeListItem
+                  label={getChallengeTitle(challenges, challenge.id)}
+                  status={getStatus({ isActive, isRevealed, isListened })}
                   onClick={() => setChallengeId(challenge.id)}
-                  className={clsx(
-                    "w-full rounded-16 border bg-background px-16 py-16 text-left transition-[background-color,border-color] duration-150 hover:bg-background-soft/40",
-                    {
-                      "border-accent": isActive,
-                      "border-border-soft": !isActive,
-                    },
-                  )}
-                >
-                  <span className="flex items-center justify-between gap-12">
-                    <span className="text-compact-01 text-text-primary">
-                      {getChallengeTitle(challenges, challenge.id)}
-                    </span>
-
-                    {isActive ? (
-                      <Tag tone="active">Activa</Tag>
-                    ) : isRevealed ? (
-                      <Tag tone="success">Resuelta</Tag>
-                    ) : isListened ? (
-                      <Tag tone="warning">Escuchada</Tag>
-                    ) : (
-                      <Tag tone="subtle">Pendiente</Tag>
-                    )}
-                  </span>
-                </button>
+                />
               </li>
             );
           })}
         </ul>
       </aside>
     </Panel>
+  );
+
+  function getStatus(props: {
+    isActive: boolean;
+    isRevealed: boolean;
+    isListened: boolean;
+  }) {
+    const { isActive, isRevealed, isListened } = props;
+
+    if (isActive) return "active";
+    if (isRevealed) return "revealed";
+    if (isListened) return "listened";
+    else return "pending";
+  }
+}
+
+type ChallengeListItemProps = ComponentProps<"button"> & {
+  label: string;
+  status: "active" | "pending" | "revealed" | "listened";
+};
+
+export default function ChallengeListItem({
+  className,
+  label,
+  status,
+  ...props
+}: ChallengeListItemProps) {
+  return (
+    <button
+      type="button"
+      className={clsx(
+        "cursor-pointer w-full rounded-16 border bg-background px-16 py-16 text-left transition-[background-color,border-color,box-shadow] duration-150",
+        {
+          "border-accent hover:bg-background-soft/40": status === "active",
+
+          "border-border-soft hover:bg-background-soft/40": status !== "active",
+        },
+        className,
+      )}
+      {...props}
+    >
+      <span className="flex items-center justify-between gap-12">
+        <span className="text-compact-01 text-text-primary">{label}</span>
+
+        {status === "active" ? (
+          <Tag tone="active">Activa</Tag>
+        ) : status === "revealed" ? (
+          <Tag tone="success">Resuelta</Tag>
+        ) : status === "listened" ? (
+          <Tag tone="warning">Escuchada</Tag>
+        ) : (
+          <Tag tone="subtle">Pendiente</Tag>
+        )}
+      </span>
+    </button>
   );
 }
