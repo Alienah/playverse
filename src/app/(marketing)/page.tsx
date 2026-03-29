@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import FeatureCard from "@/components/FeatureCard";
 import Link from "next/link";
 
@@ -13,12 +14,9 @@ export default function HomePage() {
         </p>
 
         <div className="mt-24">
-          <Link
-            href="/guess-frame"
-            className="inline-flex items-center rounded bg-accent px-24 py-12 font-semibold text-text-primary transition hover:brightness-110"
-          >
-            Explorar juegos
-          </Link>
+          <Button asChild>
+            <Link href="/guess-frame">Explorar juegos</Link>
+          </Button>
         </div>
       </section>
 

@@ -2,7 +2,8 @@ import Image from "next/image";
 import leadspaceImage from "./_images/hr-leadspace.jpeg";
 import { Progress } from "@/components/Progress";
 import { Checkbox } from "@/components/Checkbox";
-import { Expand } from "lucide-react";
+import { Expand, Play } from "lucide-react";
+import Button from "@/components/Button";
 
 const totalChallenges = 4;
 const completedChallenges = 1;
@@ -108,12 +109,14 @@ export default function HeatedRivalryPage() {
                       </p>
                     </div>
 
-                    <button
+                    <Button
                       type="button"
-                      className="rounded-full bg-layer px-16 py-12 text-compact-01 text-text-inverse transition hover:brightness-110"
+                      kind="inverse"
+                      size="icon"
+                      aria-label="Reproducir audio"
                     >
-                      Reproducir
-                    </button>
+                      <Play className="size-16" />
+                    </Button>
                   </div>
 
                   <div className="h-8 overflow-hidden rounded-full bg-background-soft">
@@ -133,12 +136,7 @@ export default function HeatedRivalryPage() {
               </div>
 
               <div className="mt-24 flex flex-wrap gap-12">
-                <button
-                  type="button"
-                  className="rounded bg-accent px-24 py-12 text-compact-01 font-semibold text-text-primary transition hover:brightness-110"
-                >
-                  Mostrar escena
-                </button>
+                <Button type="button">Mostrar escena</Button>
               </div>
             </div>
 
@@ -151,13 +149,14 @@ export default function HeatedRivalryPage() {
                   </p>
                 </div>
 
-                <button
+                <Button
                   type="button"
+                  kind="inverse"
+                  size="icon"
                   aria-label="Ver vídeo en pantalla completa"
-                  className="flex h-40 w-40 items-center justify-center rounded-full border border-border-soft bg-background text-text-primary transition hover:bg-background-soft/40"
                 >
                   <Expand className="size-16" />
-                </button>
+                </Button>
               </div>
 
               <div className="mt-24 flex aspect-video items-center justify-center rounded-24 bg-layer px-24 text-center">
@@ -178,12 +177,9 @@ export default function HeatedRivalryPage() {
               </p>
             </div>
 
-            <button
-              type="button"
-              className="rounded border border-border-soft bg-background px-12 py-8 text-compact-02 text-text-primary transition hover:bg-background-soft/40"
-            >
+            <Button type="button" kind="secondary" size="sm">
               Reset
-            </button>
+            </Button>
           </div>
 
           <ul className="mt-24 flex flex-col gap-12">
