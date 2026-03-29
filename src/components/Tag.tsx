@@ -15,6 +15,7 @@ export default function Tag({
       className={clsx(
         "inline-flex items-center rounded-full px-16 py-4 text-helper border",
         {
+          // TODO: Change active, use highlight with the inverse and
           "bg-tag-subtle-bg text-tag-subtle-text border-tag-subtle-border":
             tone === "subtle",
           "bg-tag-active-bg text-tag-active-text border-tag-active-border":

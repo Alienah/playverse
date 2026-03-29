@@ -106,11 +106,11 @@ export default function ChallengeListItem({
         <span className="text-compact-01 text-text-primary">{label}</span>
 
         {status === "active" ? (
-          <Tag tone="active">Activa</Tag>
+          <Tag tone="inverse">Activa</Tag>
         ) : status === "revealed" ? (
           <Tag tone="success">Resuelta</Tag>
         ) : status === "listened" ? (
-          <Tag tone="warning">Escuchada</Tag>
+          <Tag tone="active">Escuchada</Tag>
         ) : (
           <Tag tone="subtle">Pendiente</Tag>
         )}

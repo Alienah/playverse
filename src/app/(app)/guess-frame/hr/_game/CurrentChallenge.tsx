@@ -85,12 +85,12 @@ function CurrentChallengeTags(props: CurrentChallengeTagsProps) {
   const { isListened, isRevealed, challenge } = props;
   return (
     <div className="flex flex-wrap items-center gap-8">
-      <Tag tone="active">Prueba activa</Tag>
+      <Tag tone="inverse">Prueba activa</Tag>
 
       {isRevealed ? (
         <Tag tone="success">Resuelta</Tag>
       ) : isListened ? (
-        <Tag tone="warning">Escuchada</Tag>
+        <Tag tone="active">Escuchada</Tag>
       ) : (
         <Tag tone="subtle">Pendiente</Tag>
       )}
