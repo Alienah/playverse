@@ -2,10 +2,13 @@
   /* Colors */
   --color-background: #bfe1f3;
   --color-background-soft: #9db9ce;
+  --color-layer: #0f172a;
   --color-accent: #f59e0b;
-  --color-border-soft: rgb(255 255 255 / 0.4);
+  --color-border-soft: rgb(15 23 42 / 0.12);
+  --color-border-inverse: rgb(255 255 255 / 0.4);
   --color-text-primary: #0f172a;
   --color-text-secondary: #1e293b;
+  --color-text-inverse: #bfe1f3;
   --color-text-muted: #62839b;
   --color-surface: rgb(255 255 255 / 0.7);
 
@@ -50,9 +53,21 @@
   .link {
     color: var(--color-text-primary);
     text-decoration: none;
+    transition:
+      color 150ms ease,
+      text-decoration-color 150ms ease;
   }
 
-  .link:hover {
+  .link-inverse {
+    color: var(--color-text-inverse);
+    text-decoration: none;
+    transition:
+      color 150ms ease,
+      text-decoration-color 150ms ease;
+  }
+
+  .link:hover,
+  .link-inverse:hover {
     text-decoration: underline;
     text-underline-offset: 4px;
   }

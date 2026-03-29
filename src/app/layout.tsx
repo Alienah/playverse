@@ -1,11 +1,11 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
-import "../styles/globals.css";
 import clsx from "clsx";
+import "../styles/globals.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -15,15 +15,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="es">
       <body
         className={clsx(
           manrope.variable,
-          "min-h-screen bg-background text-text-primary antialiased",
+          "flex min-h-screen flex-col bg-background text-text-primary antialiased",
         )}
       >
         {children}

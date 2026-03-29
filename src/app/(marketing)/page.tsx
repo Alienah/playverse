@@ -1,23 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
-import logo from "./logo.png";
 
 export default function HomePage() {
   return (
-    <main className="bg-background text-text-primary">
-      <header className="flex items-center justify-center px-24 py-24">
-        <Image
-          src={logo}
-          alt="PlayVerse logo"
-          priority
-          className="h-auto w-220 sm:w-300 lg:w-400"
-        />
-      </header>
-
-      <section className="mx-auto max-w-3xl px-24 text-center">
+    <>
+      <section className="mx-auto max-w-3xl text-center">
         <h1 className="text-heading-01">Juegos para compartir momentos</h1>
 
-        <p className="text-body-01 mt-16">
+        <p className="mt-16 text-body-01">
           Una colección de juegos donde tendrás que adivinar escenas, momentos y
           emociones.
         </p>
@@ -32,14 +21,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto mt-48 max-w-960 px-24 pb-48">
-        <h2 className="text-heading-02 mb-40 lg:mb-64">Categorías</h2>
-        <ul>
+      <section className="mt-48 pb-48">
+        <h2 className="mb-40 text-heading-02 lg:mb-64">Categorías</h2>
+
+        <ul className="grid gap-24">
           <li>
             <article className="rounded-2xl border border-border-soft bg-surface p-24 shadow-md backdrop-blur-sm">
               <h3 className="text-heading-03">GuessFrame</h3>
 
-              <p className="text-body-02 mt-12">
+              <p className="mt-12 text-body-02">
                 Escucha fragmentos y adivina en qué momento ocurren.
               </p>
 
@@ -53,6 +43,6 @@ export default function HomePage() {
           </li>
         </ul>
       </section>
-    </main>
+    </>
   );
 }
