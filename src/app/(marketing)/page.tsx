@@ -1,3 +1,4 @@
+import FeatureCard from "@/components/FeatureCard";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -26,20 +27,9 @@ export default function HomePage() {
 
         <ul className="grid gap-24">
           <li>
-            <article className="rounded-2xl border border-border-soft bg-surface p-24 shadow-md backdrop-blur-sm">
-              <h3 className="text-heading-03">GuessFrame</h3>
-
-              <p className="mt-12 text-body-02">
-                Escucha fragmentos y adivina en qué momento ocurren.
-              </p>
-
-              <Link
-                href="/guess-frame"
-                className="link mt-16 inline-flex items-center gap-8"
-              >
-                Entrar <span aria-hidden="true">→</span>
-              </Link>
-            </article>
+            <FeatureCard title="GuessFrame" link={{ href: "/guess-frame" }}>
+              Escucha fragmentos y adivina en qué momento ocurren.
+            </FeatureCard>
           </li>
         </ul>
       </section>
