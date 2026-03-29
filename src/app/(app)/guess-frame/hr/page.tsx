@@ -1,24 +1,75 @@
+import Image from "next/image";
+import leadspaceImage from "./_images/hr-leadspace.jpeg";
+import { Progress } from "@/components/Progress";
+import { Checkbox } from "@/components/Checkbox";
+import { Expand } from "lucide-react";
+
+const totalChallenges = 4;
+const completedChallenges = 1;
+const progressValue = (completedChallenges / totalChallenges) * 100;
+
 export default function HeatedRivalryPage() {
   return (
     <div className="flex flex-col gap-40 pb-48">
-      <section className="max-w-3xl">
-        <p className="text-compact-01 text-text-muted">GuessFrame</p>
+      <section className="flex flex-col gap-40" aria-labelledby="game-title">
+        <div className="max-w-3xl">
+          <p className="text-compact-01 text-text-muted">GuessFrame</p>
 
-        <h1 className="mt-8 text-heading-02">Heated Rivalry</h1>
+          <h1 id="game-title" className="mt-8 text-heading-02">
+            Heated Rivalry
+          </h1>
 
-        <p className="mt-16 text-body-01 text-text-secondary">
-          Escucha un fragmento y trata de identificar en qué momento aparece esa
-          canción antes de revelar la escena.
-        </p>
+          <p className="mt-16 text-body-01 text-text-secondary">
+            Escucha un fragmento y trata de identificar en qué momento aparece
+            esa canción antes de revelar la escena.
+          </p>
 
-        <p className="mt-12 text-helper text-text-muted">
-          Inspirado en Heated Rivalry. Proyecto privado y no comercial.
-        </p>
+          <p className="mt-12 text-helper text-text-muted">
+            Inspirado en Heated Rivalry. Proyecto privado y no comercial.
+          </p>
+        </div>
+
+        <div className="overflow-hidden rounded-24 border border-border-soft bg-surface shadow-sm">
+          <Image
+            src={leadspaceImage}
+            alt="Imagen promocional de Heated Rivalry"
+            priority
+            className="h-auto w-full object-cover"
+          />
+        </div>
       </section>
 
-      <section className="grid gap-24 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+      <section
+        aria-labelledby="progress-id"
+        className="rounded-24 border border-border-soft bg-surface p-24 shadow-sm"
+      >
+        <div className="flex flex-col gap-12">
+          <div className="flex flex-wrap items-center justify-between gap-12">
+            <div>
+              <h2 className="text-heading-03" id="progress-id">
+                Progreso
+              </h2>
+              <p className="mt-8 text-body-02 text-text-secondary">
+                Has completado {completedChallenges} de {totalChallenges}{" "}
+                pruebas.
+              </p>
+            </div>
+
+            <p className="text-compact-01 text-text-muted">
+              {Math.round(progressValue)}%
+            </p>
+          </div>
+
+          <Progress value={progressValue} />
+        </div>
+      </section>
+
+      <section
+        className="grid gap-24 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start"
+        aria-label="Juego"
+      >
         <article className="rounded-24 border border-border-soft bg-surface p-24 shadow-sm">
-          <div className="flex flex-col gap-64">
+          <div className="flex flex-col gap-40 lg:gap-64">
             <div>
               <div className="flex flex-col gap-16">
                 <div className="flex flex-wrap items-center gap-8">
@@ -28,6 +79,10 @@ export default function HeatedRivalryPage() {
 
                   <span className="rounded-full bg-background px-12 py-8 text-compact-02 text-text-muted">
                     Pendiente
+                  </span>
+
+                  <span className="rounded-full bg-background px-12 py-8 text-compact-02 text-text-muted">
+                    Medium · 2 puntos
                   </span>
                 </div>
 
@@ -42,11 +97,12 @@ export default function HeatedRivalryPage() {
 
               <div className="mt-24 rounded-24 border border-border-soft bg-background/60 p-24">
                 <div className="flex flex-col gap-16">
-                  <div className="flex items-center justify-between gap-16">
+                  <div className="flex flex-wrap items-start justify-between gap-16">
                     <div>
                       <p className="text-compact-02 text-text-muted">
                         Fragmento de audio
                       </p>
+
                       <p className="mt-4 text-body-02 text-text-secondary">
                         Duración aproximada: 00:30
                       </p>
@@ -63,6 +119,16 @@ export default function HeatedRivalryPage() {
                   <div className="h-8 overflow-hidden rounded-full bg-background-soft">
                     <div className="h-full w-[32%] rounded-full bg-accent" />
                   </div>
+
+                  <div className="mt-8 inline-flex items-center gap-12">
+                    <Checkbox id="challenge-listened" />
+                    <label
+                      htmlFor="challenge-listened"
+                      className="text-compact-01 text-text-primary"
+                    >
+                      Marcar como escuchada
+                    </label>
+                  </div>
                 </div>
               </div>
 
@@ -73,15 +139,9 @@ export default function HeatedRivalryPage() {
                 >
                   Mostrar escena
                 </button>
-
-                <button
-                  type="button"
-                  className="rounded border border-border-soft bg-background px-24 py-12 text-compact-01 text-text-primary transition hover:bg-background-soft/40"
-                >
-                  Marcar como escuchada
-                </button>
               </div>
             </div>
+
             <div>
               <div className="flex items-center justify-between gap-16">
                 <div>
@@ -93,9 +153,10 @@ export default function HeatedRivalryPage() {
 
                 <button
                   type="button"
-                  className="rounded border border-border-soft bg-background px-16 py-12 text-compact-01 text-text-primary transition hover:bg-background-soft/40"
+                  aria-label="Ver vídeo en pantalla completa"
+                  className="flex h-40 w-40 items-center justify-center rounded-full border border-border-soft bg-background text-text-primary transition hover:bg-background-soft/40"
                 >
-                  Pantalla completa
+                  <Expand className="size-16" />
                 </button>
               </div>
 
@@ -108,7 +169,7 @@ export default function HeatedRivalryPage() {
           </div>
         </article>
 
-        <aside className="rounded-24 border border-border-soft bg-surface p-24 shadow-sm">
+        <aside className="rounded-24 border border-border-soft bg-surface p-24 shadow-sm lg:sticky lg:top-24">
           <div className="flex items-start justify-between gap-16">
             <div>
               <h2 className="text-heading-03">Pruebas</h2>
@@ -132,11 +193,7 @@ export default function HeatedRivalryPage() {
                 className="w-full rounded-16 border border-accent bg-background px-16 py-16 text-left transition hover:bg-background-soft/40"
               >
                 <div className="flex items-center justify-between gap-12">
-                  <div>
-                    <p className="text-compact-01 text-text-primary">
-                      Prueba 01
-                    </p>
-                  </div>
+                  <p className="text-compact-01 text-text-primary">Prueba 01</p>
 
                   <span className="rounded-full bg-accent px-12 py-8 text-compact-02 text-text-primary">
                     Activa
@@ -151,11 +208,7 @@ export default function HeatedRivalryPage() {
                 className="w-full rounded-16 border border-border-soft bg-background px-16 py-16 text-left transition hover:bg-background-soft/40"
               >
                 <div className="flex items-center justify-between gap-12">
-                  <div>
-                    <p className="text-compact-01 text-text-primary">
-                      Prueba 02
-                    </p>
-                  </div>
+                  <p className="text-compact-01 text-text-primary">Prueba 02</p>
 
                   <span className="rounded-full bg-background-soft px-12 py-8 text-compact-02 text-text-muted">
                     Pendiente
@@ -170,11 +223,7 @@ export default function HeatedRivalryPage() {
                 className="w-full rounded-16 border border-border-soft bg-background px-16 py-16 text-left transition hover:bg-background-soft/40"
               >
                 <div className="flex items-center justify-between gap-12">
-                  <div>
-                    <p className="text-compact-01 text-text-primary">
-                      Prueba 03
-                    </p>
-                  </div>
+                  <p className="text-compact-01 text-text-primary">Prueba 03</p>
 
                   <span className="rounded-full bg-background-soft px-12 py-8 text-compact-02 text-text-muted">
                     Pendiente
@@ -189,11 +238,7 @@ export default function HeatedRivalryPage() {
                 className="w-full rounded-16 border border-border-soft bg-background px-16 py-16 text-left transition hover:bg-background-soft/40"
               >
                 <div className="flex items-center justify-between gap-12">
-                  <div>
-                    <p className="text-compact-01 text-text-primary">
-                      Prueba 04
-                    </p>
-                  </div>
+                  <p className="text-compact-01 text-text-primary">Prueba 04</p>
 
                   <span className="rounded-full bg-background-soft px-12 py-8 text-compact-02 text-text-muted">
                     Pendiente
