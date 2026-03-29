@@ -43,8 +43,8 @@ export function getDifficultyTagTone(difficulty: Challenge["difficulty"]) {
 
 export function getChallengeTitle(challenges: Challenge[], currentId: string) {
   if (!currentId) return "";
+
   return `Prueba ${String(
     challenges.findIndex((challenge) => challenge.id === currentId) + 1,
-  ).padStart(2, "0")}
-    `;
+  ).padStart(2, "0")}`;
 }

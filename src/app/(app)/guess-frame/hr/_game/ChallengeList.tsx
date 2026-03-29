@@ -9,7 +9,7 @@ import { useGame } from "./GameContext";
 import { useChallengeParam } from "./useChallengeParam";
 import { getChallengeTitle } from "./challengeUtils";
 import { Challenge } from "../types";
-import type { ComponentProps } from "react";
+import { useMemo, type ComponentProps } from "react";
 
 type Props = {
   challenges: Challenge[];
@@ -19,6 +19,26 @@ type Props = {
 export function ChallengeList({ challenges, challengeId }: Props) {
   const { listenedIds, revealedIds, resetGameState } = useGame();
   const { setChallengeId } = useChallengeParam(challenges[0]?.id ?? "");
+
+  const orderedChallenges = useMemo(() => {
+    const activeChallenge = challenges.find(
+      (challenge) => challenge.id === challengeId,
+    );
+
+    const pendingChallenges = challenges.filter(
+      (challenge) =>
+        challenge.id !== challengeId && !revealedIds.includes(challenge.id),
+    );
+
+    const revealedChallenges = challenges.filter(
+      (challenge) =>
+        challenge.id !== challengeId && revealedIds.includes(challenge.id),
+    );
+
+    return activeChallenge
+      ? [activeChallenge, ...pendingChallenges, ...revealedChallenges]
+      : [...pendingChallenges, ...revealedChallenges];
+  }, [challenges, challengeId, revealedIds]);
 
   function handleReset() {
     const firstId = challenges[0]?.id ?? "";
@@ -43,7 +63,7 @@ export function ChallengeList({ challenges, challengeId }: Props) {
         </div>
 
         <ul className="mt-24 flex flex-col gap-12">
-          {challenges.map((challenge) => {
+          {orderedChallenges.map((challenge) => {
             const isActive = challenge.id === challengeId;
             const isRevealed = revealedIds.includes(challenge.id);
             const isListened = listenedIds.includes(challenge.id);
@@ -62,19 +82,19 @@ export function ChallengeList({ challenges, challengeId }: Props) {
       </aside>
     </Panel>
   );
+}
 
-  function getStatus(props: {
-    isActive: boolean;
-    isRevealed: boolean;
-    isListened: boolean;
-  }) {
-    const { isActive, isRevealed, isListened } = props;
+function getStatus(props: {
+  isActive: boolean;
+  isRevealed: boolean;
+  isListened: boolean;
+}) {
+  const { isActive, isRevealed, isListened } = props;
 
-    if (isActive) return "active";
-    if (isRevealed) return "revealed";
-    if (isListened) return "listened";
-    else return "pending";
-  }
+  if (isActive) return "active";
+  if (isRevealed) return "revealed";
+  if (isListened) return "listened";
+  else return "pending";
 }
 
 type ChallengeListItemProps = ComponentProps<"button"> & {
