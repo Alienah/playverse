@@ -21,7 +21,7 @@ export default function Button({
   return (
     <Comp
       className={clsx(
-        "inline-flex items-center justify-center gap-8 rounded outline-none transition duration-150 disabled:pointer-events-none disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "cursor-pointer inline-flex items-center justify-center gap-8 rounded outline-none transition duration-150 disabled:pointer-events-none disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
 
         // 🎯 KIND
         {

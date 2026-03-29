@@ -17,7 +17,7 @@ export default function ChallengeListItem({
     <button
       type="button"
       className={clsx(
-        "w-full rounded-16 border bg-background px-16 py-16 text-left transition-[background-color,border-color,box-shadow] duration-150",
+        "cursor-pointer w-full rounded-16 border bg-background px-16 py-16 text-left transition-[background-color,border-color,box-shadow] duration-150",
         {
           "border-accent hover:bg-background-soft/40": status === "active",
 
