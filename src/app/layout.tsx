@@ -1,5 +1,12 @@
 import { Metadata } from "next";
-import "./globals.css";
+import { Manrope } from "next/font/google";
+import "../styles/globals.css";
+import clsx from "clsx";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "PlayVerse",
@@ -13,7 +20,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="bg-zinc-950 text-zinc-50 antialiased">{children}</body>
+      <body
+        className={clsx(
+          manrope.variable,
+          "min-h-screen bg-background text-text-primary antialiased",
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }

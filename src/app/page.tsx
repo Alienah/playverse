@@ -1,52 +1,57 @@
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../public/images/logo.png";
+import logo from "./logo.png";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#BFE1F3] text-[#0F172A]">
-      {/* HEADER */}
-      <header className="flex items-center justify-center py-6">
-        <Image src={logo} alt="PlayVerse logo" width={300} priority />
+    <main className="bg-background text-text-primary">
+      <header className="flex items-center justify-center px-24 py-24">
+        <Image
+          src={logo}
+          alt="PlayVerse logo"
+          priority
+          className="h-auto w-220 sm:w-300 lg:w-400"
+        />
       </header>
 
-      {/* HERO */}
-      <section className="mx-auto max-w-3xl px-6 text-center">
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-          Juegos para compartir momentos
-        </h1>
+      <section className="mx-auto max-w-3xl px-24 text-center">
+        <h1 className="text-heading-01">Juegos para compartir momentos</h1>
 
-        <p className="mt-4 text-[#1E293B]">
+        <p className="text-body-01 mt-16">
           Una colección de juegos donde tendrás que adivinar escenas, momentos y
           emociones.
         </p>
 
-        <div className="mt-6">
+        <div className="mt-24">
           <Link
             href="/guess-frame"
-            className="inline-flex items-center rounded-lg bg-[#F59E0B] px-6 py-3 font-medium text-[#0F172A] hover:brightness-110"
+            className="inline-flex items-center rounded bg-accent px-24 py-12 font-semibold text-text-primary transition hover:brightness-110"
           >
             Explorar juegos
           </Link>
         </div>
       </section>
 
-      {/* CATEGORY CARD */}
-      <section className="mx-auto mt-16 max-w-4xl px-6">
-        <div className="rounded-2xl bg-white/70 p-6 shadow-md backdrop-blur">
-          <h2 className="text-2xl font-semibold">GuessFrame</h2>
+      <section className="mx-auto mt-48 max-w-960 px-24 pb-48">
+        <h2 className="text-heading-02 mb-40 lg:mb-64">Categorías</h2>
+        <ul>
+          <li>
+            <article className="rounded-2xl border border-border-soft bg-surface p-24 shadow-md backdrop-blur-sm">
+              <h3 className="text-heading-03">GuessFrame</h3>
 
-          <p className="mt-2 text-[#1E293B]">
-            Escucha fragmentos y adivina en qué momento ocurren.
-          </p>
+              <p className="text-body-02 mt-12">
+                Escucha fragmentos y adivina en qué momento ocurren.
+              </p>
 
-          <Link
-            href="/guess-frame"
-            className="mt-4 inline-block text-sm font-medium text-slate-deep transition hover:underline hover:underline-offset-4"
-          >
-            Entrar →
-          </Link>
-        </div>
+              <Link
+                href="/guess-frame"
+                className="link mt-16 inline-flex items-center gap-8"
+              >
+                Entrar <span aria-hidden="true">→</span>
+              </Link>
+            </article>
+          </li>
+        </ul>
       </section>
     </main>
   );

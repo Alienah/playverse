@@ -1,0 +1,59 @@
+@theme {
+  /* Colors */
+  --color-background: #bfe1f3;
+  --color-background-soft: #9db9ce;
+  --color-accent: #f59e0b;
+  --color-border-soft: rgb(255 255 255 / 0.4);
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #1e293b;
+  --color-text-muted: #62839b;
+  --color-surface: rgb(255 255 255 / 0.7);
+
+  /* Typography */
+  --text-heading-01: 3rem;
+  --text-heading-01--line-height: 1.05;
+  --text-heading-01--letter-spacing: -0.03em;
+  --text-heading-01--font-weight: 800;
+
+  --text-heading-02: 2.25rem;
+  --text-heading-02--line-height: 1.1;
+  --text-heading-02--letter-spacing: -0.025em;
+  --text-heading-02--font-weight: 700;
+
+  --text-heading-03: 1.5rem;
+  --text-heading-03--line-height: 1.2;
+  --text-heading-03--letter-spacing: -0.02em;
+  --text-heading-03--font-weight: 700;
+
+  --text-body-01: 1.125rem;
+  --text-body-01--line-height: 1.7;
+  --text-body-01--font-weight: 400;
+
+  --text-body-02: 1rem;
+  --text-body-02--line-height: 1.65;
+  --text-body-02--font-weight: 400;
+
+  --text-helper: 0.875rem;
+  --text-helper--line-height: 1.5;
+  --text-helper--font-weight: 400;
+
+  --text-compact-01: 0.875rem;
+  --text-compact-01--line-height: 1.25;
+  --text-compact-01--font-weight: 500;
+
+  --text-compact-02: 0.75rem;
+  --text-compact-02--line-height: 1.2;
+  --text-compact-02--font-weight: 500;
+}
+
+@layer components {
+  .link {
+    color: var(--color-text-primary);
+    text-decoration: none;
+  }
+
+  .link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}

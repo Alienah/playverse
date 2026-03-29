@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@import "../styles/tokens.css";
+
+@theme inline {
+  --font-sans: var(--font-manrope);
+  --spacing: 1px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-manrope), sans-serif;
+}
