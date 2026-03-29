@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/Checkbox";
 import { Expand, Play } from "lucide-react";
 import Button from "@/components/Button";
 import Tag from "@/components/Tag";
+import ChallengeListItem from "./ChallengeListItem";
 
 const totalChallenges = 4;
 const completedChallenges = 1;
@@ -177,55 +178,19 @@ export default function HeatedRivalryPage() {
 
           <ul className="mt-24 flex flex-col gap-12">
             <li>
-              <button
-                type="button"
-                className="w-full rounded-16 border border-accent bg-background px-16 py-16 text-left transition hover:bg-background-soft/40"
-              >
-                <div className="flex items-center justify-between gap-12">
-                  <p className="text-compact-01 text-text-primary">Prueba 01</p>
-
-                  <Tag tone="active">Activa</Tag>
-                </div>
-              </button>
+              <ChallengeListItem label="Prueba 01" status="active" />
             </li>
 
             <li>
-              <button
-                type="button"
-                className="w-full rounded-16 border border-border-soft bg-background px-16 py-16 text-left transition hover:bg-background-soft/40"
-              >
-                <div className="flex items-center justify-between gap-12">
-                  <p className="text-compact-01 text-text-primary">Prueba 02</p>
-
-                  <Tag tone="subtle">Pendiente</Tag>
-                </div>
-              </button>
+              <ChallengeListItem label="Prueba 02" status="pending" />
             </li>
 
             <li>
-              <button
-                type="button"
-                className="w-full rounded-16 border border-border-soft bg-background px-16 py-16 text-left transition hover:bg-background-soft/40"
-              >
-                <div className="flex items-center justify-between gap-12">
-                  <p className="text-compact-01 text-text-primary">Prueba 03</p>
-
-                  <Tag tone="subtle">Pendiente</Tag>
-                </div>
-              </button>
+              <ChallengeListItem label="Prueba 03" status="pending" />
             </li>
 
             <li>
-              <button
-                type="button"
-                className="w-full rounded-16 border border-border-soft bg-background px-16 py-16 text-left transition hover:bg-background-soft/40"
-              >
-                <div className="flex items-center justify-between gap-12">
-                  <p className="text-compact-01 text-text-primary">Prueba 04</p>
-
-                  <Tag tone="subtle">Pendiente</Tag>
-                </div>
-              </button>
+              <ChallengeListItem label="Prueba 04" status="pending" />
             </li>
           </ul>
         </aside>
