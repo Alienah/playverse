@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Panel from "@/components/Panel";
 import {
   formatTime,
+  getChallengeStatus,
   getDifficultyTagTone,
   getInstructionContent,
 } from "./challengeUtils";
@@ -14,6 +15,7 @@ import { Checkbox } from "@/components/Checkbox";
 
 import { Challenge } from "../types";
 import { useGame } from "./GameContext";
+import { ChallengeStatusTag } from "./ChallengeStatusTag";
 
 type CurrentChallengeProps = {
   challengeId: string;
@@ -114,15 +116,9 @@ function CurrentChallengeTags(props: CurrentChallengeTagsProps) {
   const { isListened, isRevealed, challenge } = props;
   return (
     <div className="flex flex-wrap items-center gap-8">
-      <Tag tone="inverse">Prueba activa</Tag>
-
-      {isRevealed ? (
-        <Tag tone="success">Resuelta</Tag>
-      ) : isListened ? (
-        <Tag tone="active">Escuchada</Tag>
-      ) : (
-        <Tag tone="subtle">Pendiente</Tag>
-      )}
+      <ChallengeStatusTag
+        status={getChallengeStatus({ isListened, isRevealed })}
+      />
 
       <Tag tone={getDifficultyTagTone(challenge.difficulty)}>
         {challenge.difficulty[0].toUpperCase() + challenge.difficulty.slice(1)}{" "}

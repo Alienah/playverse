@@ -32,14 +32,29 @@ export function getInstructionContent(instruction: Challenge["instruction"]) {
 
 export function getDifficultyTagTone(difficulty: Challenge["difficulty"]) {
   switch (difficulty) {
-    case "hard":
-      return "inverse";
-    case "medium":
-      return "warning";
     case "easy":
+      return "easy";
+    case "medium":
+      return "medium";
+    case "hard":
+      return "hard";
     default:
       return "subtle";
   }
+}
+
+export type ChallengeStatus = "active" | "pending" | "revealed" | "listened";
+
+export function getChallengeStatus(props: {
+  isActive?: boolean;
+  isRevealed?: boolean;
+  isListened?: boolean;
+}): ChallengeStatus {
+  const { isActive, isRevealed, isListened } = props;
+  if (isActive) return "active";
+  if (isRevealed) return "revealed";
+  if (isListened) return "listened";
+  else return "pending";
 }
 
 export function getChallengeTitle(challenges: Challenge[], currentId: string) {

@@ -3,13 +3,13 @@
 import clsx from "clsx";
 import Button from "@/components/Button";
 import Panel from "@/components/Panel";
-import Tag from "@/components/Tag";
 
 import { useGame } from "./GameContext";
 import { useChallengeParam } from "./useChallengeParam";
-import { getChallengeTitle } from "./challengeUtils";
+import { getChallengeStatus, getChallengeTitle } from "./challengeUtils";
 import { Challenge } from "../types";
 import { useMemo, type ComponentProps } from "react";
+import { ChallengeStatusTag } from "./ChallengeStatusTag";
 
 type Props = {
   challenges: Challenge[];
@@ -72,7 +72,11 @@ export function ChallengeList({ challenges, challengeId }: Props) {
               <li key={challenge.id}>
                 <ChallengeListItem
                   label={getChallengeTitle(challenges, challenge.id)}
-                  status={getStatus({ isActive, isRevealed, isListened })}
+                  status={getChallengeStatus({
+                    isActive,
+                    isRevealed,
+                    isListened,
+                  })}
                   onClick={() => setChallengeId(challenge.id)}
                 />
               </li>
@@ -82,19 +86,6 @@ export function ChallengeList({ challenges, challengeId }: Props) {
       </aside>
     </Panel>
   );
-}
-
-function getStatus(props: {
-  isActive: boolean;
-  isRevealed: boolean;
-  isListened: boolean;
-}) {
-  const { isActive, isRevealed, isListened } = props;
-
-  if (isActive) return "active";
-  if (isRevealed) return "revealed";
-  if (isListened) return "listened";
-  else return "pending";
 }
 
 type ChallengeListItemProps = ComponentProps<"button"> & {
@@ -125,15 +116,7 @@ export default function ChallengeListItem({
       <span className="flex items-center justify-between gap-12">
         <span className="text-compact-01 text-text-primary">{label}</span>
 
-        {status === "active" ? (
-          <Tag tone="inverse">Activa</Tag>
-        ) : status === "revealed" ? (
-          <Tag tone="success">Resuelta</Tag>
-        ) : status === "listened" ? (
-          <Tag tone="active">Escuchada</Tag>
-        ) : (
-          <Tag tone="subtle">Pendiente</Tag>
-        )}
+        <ChallengeStatusTag status={status} />
       </span>
     </button>
   );
