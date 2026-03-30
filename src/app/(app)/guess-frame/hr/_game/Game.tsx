@@ -25,7 +25,7 @@ export function Game({ challenges }: GameProps) {
 
   return (
     <GameProvider>
-      <GameProgressPanel totalChallenges={challenges.length} />
+      <GameProgressPanel challenges={challenges} />
 
       <section
         className="grid gap-24 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start"

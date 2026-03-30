@@ -1,4 +1,5 @@
 import { Challenge } from "../types";
+import { ChallengeResults } from "./GameContext";
 
 export function formatTime(value: number) {
   if (!Number.isFinite(value) || value < 0) return "00:00";
@@ -47,4 +48,33 @@ export function getChallengeTitle(challenges: Challenge[], currentId: string) {
   return `Prueba ${String(
     challenges.findIndex((challenge) => challenge.id === currentId) + 1,
   ).padStart(2, "0")}`;
+}
+
+export function getScore(
+  challenges: Challenge[],
+  challengeResults: ChallengeResults,
+) {
+  let score = 0;
+
+  for (const challenge of challenges) {
+    if (
+      challengeResults[challenge.id] === "correct" &&
+      typeof challenge.points === "number"
+    ) {
+      score += challenge.points;
+    }
+  }
+  return score;
+}
+
+export function getTotalPossibleScore(challenges: Challenge[]) {
+  let total = 0;
+
+  for (const challenge of challenges) {
+    if (typeof challenge.points === "number") {
+      total += challenge.points;
+    }
+  }
+
+  return total;
 }

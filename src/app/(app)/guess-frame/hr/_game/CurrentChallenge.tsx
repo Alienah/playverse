@@ -24,16 +24,23 @@ type CurrentChallengeProps = {
 export function CurrentChallenge(props: CurrentChallengeProps) {
   const { challengeId, challenge, title } = props;
 
-  const { listenedIds, revealedIds, revealChallenge } = useGame();
+  const {
+    listenedIds,
+    revealedIds,
+    revealChallenge,
+    challengeResults,
+    setChallengeResult,
+  } = useGame();
 
   const isListened = listenedIds.includes(challengeId);
   const isRevealed = revealedIds.includes(challengeId);
+  const result = challengeResults[challengeId];
 
   return (
     <Panel asChild>
       <article>
         <div className="flex flex-col gap-40 lg:gap-64">
-          <div>
+          <div className="flex flex-col gap-32">
             <div className="flex flex-col gap-16">
               <CurrentChallengeTags
                 challenge={challenge}
@@ -55,13 +62,35 @@ export function CurrentChallenge(props: CurrentChallengeProps) {
               isListened={isListened}
             />
 
-            <div className="mt-24 flex flex-wrap gap-12">
+            <div className="flex flex-col gap-16 sm:flex-row sm:justify-between">
               <Button
                 type="button"
                 onClick={() => revealChallenge(challengeId)}
               >
                 Mostrar escena
               </Button>
+
+              {isRevealed ? (
+                <div className="flex flex-wrap gap-8">
+                  <Button
+                    type="button"
+                    size="sm"
+                    kind={result === "correct" ? "success" : "secondary"}
+                    onClick={() => setChallengeResult(challengeId, "correct")}
+                  >
+                    Acertada
+                  </Button>
+
+                  <Button
+                    type="button"
+                    size="sm"
+                    kind={result === "incorrect" ? "danger" : "secondary"}
+                    onClick={() => setChallengeResult(challengeId, "incorrect")}
+                  >
+                    Fallada
+                  </Button>
+                </div>
+              ) : null}
             </div>
           </div>
 
@@ -143,7 +172,7 @@ function CurrentChallengeAudio(props: CurrentChallengeAudioProps) {
     }
   }
   return (
-    <div className="mt-24 rounded-24 border border-border-soft bg-background/60 p-24">
+    <div className="rounded-24 border border-border-soft bg-background/60 p-24">
       <div className="flex flex-col gap-16">
         <div className="flex flex-wrap items-start justify-between gap-16">
           <div>

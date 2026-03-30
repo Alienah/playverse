@@ -4,7 +4,7 @@ import clsx from "clsx";
 import type { ComponentProps } from "react";
 
 type ButtonProps = ComponentProps<"button"> & {
-  kind?: "primary" | "secondary" | "ghost" | "inverse";
+  kind?: "primary" | "secondary" | "ghost" | "inverse" | "success" | "danger";
   size?: "sm" | "md" | "icon";
   asChild?: boolean;
 };
@@ -31,6 +31,10 @@ export default function Button({
             kind === "secondary",
           "text-text-primary hover:bg-background-soft/40": kind === "ghost",
           "bg-layer text-text-inverse hover:brightness-110": kind === "inverse",
+          "bg-success-soft text-success-text border border-success":
+            kind === "success",
+          "bg-danger-soft text-danger-text border border-danger":
+            kind === "danger",
         },
 
         // 📏 SIZE

@@ -9,37 +9,70 @@ import {
   type ReactNode,
 } from "react";
 
+export type ChallengeResult = "correct" | "incorrect";
+export type ChallengeResults = Record<string, ChallengeResult>;
+
+type PersistedGameState = {
+  revealedIds: string[];
+  challengeResults: ChallengeResults;
+};
+
 type GameContextValue = {
   listenedIds: string[];
   revealedIds: string[];
   isHydrated: boolean;
+  challengeResults: ChallengeResults;
   markChallengeAsListened: (id: string, checked: boolean) => void;
   revealChallenge: (id: string) => void;
   resetGameState: () => void;
+  setChallengeResult: (challengeId: string, result: ChallengeResult) => void;
 };
 
 const GameContext = createContext<GameContextValue | null>(null);
 
-const REVEALED_STORAGE_KEY = "playverse:hr:revealed";
+const STORAGE_KEY = "playverse:hr:game-state";
+
+const INITIAL_PERSISTED_STATE: PersistedGameState = {
+  revealedIds: [],
+  challengeResults: {},
+};
 
 export function GameProvider({ children }: { children: ReactNode }) {
   const [listenedIds, setListenedIds] = useState<string[]>([]);
   const [revealedIds, setRevealedIds] = useState<string[]>([]);
+  const [challengeResults, setChallengeResults] = useState<ChallengeResults>(
+    {},
+  );
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
     try {
-      const storedValue = window.localStorage.getItem(REVEALED_STORAGE_KEY);
+      const storedValue = window.localStorage.getItem(STORAGE_KEY);
 
-      if (storedValue) {
-        const parsedValue = JSON.parse(storedValue);
-
-        if (Array.isArray(parsedValue)) {
-          setRevealedIds(parsedValue);
-        }
+      if (!storedValue) {
+        setIsHydrated(true);
+        return;
       }
+
+      const parsedValue = JSON.parse(storedValue);
+
+      const persistedState: PersistedGameState = {
+        revealedIds: Array.isArray(parsedValue?.revealedIds)
+          ? parsedValue.revealedIds
+          : INITIAL_PERSISTED_STATE.revealedIds,
+
+        challengeResults:
+          parsedValue?.challengeResults &&
+          typeof parsedValue.challengeResults === "object" &&
+          !Array.isArray(parsedValue.challengeResults)
+            ? parsedValue.challengeResults
+            : INITIAL_PERSISTED_STATE.challengeResults,
+      };
+
+      setRevealedIds(persistedState.revealedIds);
+      setChallengeResults(persistedState.challengeResults);
     } catch {
-      window.localStorage.removeItem(REVEALED_STORAGE_KEY);
+      window.localStorage.removeItem(STORAGE_KEY);
     } finally {
       setIsHydrated(true);
     }
@@ -48,16 +81,22 @@ export function GameProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!isHydrated) return;
 
-    if (revealedIds.length === 0) {
-      window.localStorage.removeItem(REVEALED_STORAGE_KEY);
+    const persistedState: PersistedGameState = {
+      revealedIds,
+      challengeResults,
+    };
+
+    const isEmpty =
+      persistedState.revealedIds.length === 0 &&
+      Object.keys(persistedState.challengeResults).length === 0;
+
+    if (isEmpty) {
+      window.localStorage.removeItem(STORAGE_KEY);
       return;
     }
 
-    window.localStorage.setItem(
-      REVEALED_STORAGE_KEY,
-      JSON.stringify(revealedIds),
-    );
-  }, [revealedIds, isHydrated]);
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(persistedState));
+  }, [revealedIds, challengeResults, isHydrated]);
 
   const markChallengeAsListened = useCallback(
     (id: string, checked: boolean) => {
@@ -87,7 +126,18 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const resetGameState = useCallback(() => {
     setListenedIds([]);
     setRevealedIds([]);
+    setChallengeResults({});
   }, []);
+
+  const setChallengeResult = useCallback(
+    (challengeId: string, result: ChallengeResult) => {
+      setChallengeResults((previous) => ({
+        ...previous,
+        [challengeId]: result,
+      }));
+    },
+    [],
+  );
 
   return (
     <GameContext.Provider
@@ -95,7 +145,9 @@ export function GameProvider({ children }: { children: ReactNode }) {
         listenedIds,
         revealedIds,
         isHydrated,
+        challengeResults,
         markChallengeAsListened,
+        setChallengeResult,
         revealChallenge,
         resetGameState,
       }}
