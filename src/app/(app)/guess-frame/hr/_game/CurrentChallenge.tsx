@@ -9,7 +9,7 @@ import {
 } from "./challengeUtils";
 import Button from "@/components/Button";
 import Tag from "@/components/Tag";
-import { Expand, Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand, Pause, Play } from "lucide-react";
 import { Progress } from "@/components/Progress";
 import { Checkbox } from "@/components/Checkbox";
 
@@ -21,10 +21,22 @@ type CurrentChallengeProps = {
   challengeId: string;
   challenge: Challenge;
   title: string;
+  onGoToPreviousChallenge: () => void;
+  onGoToNextChallenge: () => void;
+  hasPreviousChallenge: boolean;
+  hasNextChallenge: boolean;
 };
 
 export function CurrentChallenge(props: CurrentChallengeProps) {
-  const { challengeId, challenge, title } = props;
+  const {
+    challengeId,
+    challenge,
+    title,
+    onGoToPreviousChallenge,
+    onGoToNextChallenge,
+    hasPreviousChallenge,
+    hasNextChallenge,
+  } = props;
 
   const {
     listenedIds,
@@ -50,8 +62,34 @@ export function CurrentChallenge(props: CurrentChallengeProps) {
                 isListened={isListened}
               />
 
-              <div className="flex flex-col gap-8">
-                <h2 className="text-heading-03">{title}</h2>
+              <div className="flex flex-col gap-12">
+                <div className="flex items-start justify-between gap-16">
+                  <h2 className="text-heading-03">{title}</h2>
+
+                  <div className="flex items-center gap-8">
+                    <Button
+                      type="button"
+                      kind="secondary"
+                      size="icon"
+                      aria-label="Ir a la prueba anterior"
+                      onClick={onGoToPreviousChallenge}
+                      disabled={!hasPreviousChallenge}
+                    >
+                      <ChevronLeft className="size-16" />
+                    </Button>
+
+                    <Button
+                      type="button"
+                      kind="secondary"
+                      size="icon"
+                      aria-label="Ir a la prueba siguiente"
+                      onClick={onGoToNextChallenge}
+                      disabled={!hasNextChallenge}
+                    >
+                      <ChevronRight className="size-16" />
+                    </Button>
+                  </div>
+                </div>
 
                 <p className="text-body-02 text-text-secondary">
                   {getInstructionContent(challenge.instruction)}
