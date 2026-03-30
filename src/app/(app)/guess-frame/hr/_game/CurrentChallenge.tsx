@@ -106,6 +106,7 @@ export function CurrentChallenge(props: CurrentChallengeProps) {
               <Button
                 type="button"
                 onClick={() => revealChallenge(challengeId)}
+                disabled={!isListened}
               >
                 Mostrar escena
               </Button>
