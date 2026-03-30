@@ -3,6 +3,7 @@ import Image from "next/image";
 import leadspaceImage from "./_images/hr-leadspace.jpeg";
 import { challenges } from "./data";
 import { Game } from "./_game/Game";
+import { Suspense } from "react";
 
 export default function HeatedRivalryPage() {
   return (
@@ -34,8 +35,9 @@ export default function HeatedRivalryPage() {
           />
         </div>
       </section>
-
-      <Game challenges={challenges} />
+      <Suspense fallback={<div />}>
+        <Game challenges={challenges} />
+      </Suspense>
     </div>
   );
 }
