@@ -9,7 +9,14 @@ import {
 } from "./challengeUtils";
 import Button from "@/components/Button";
 import Tag from "@/components/Tag";
-import { ChevronLeft, ChevronRight, Expand, Pause, Play } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Expand,
+  Pause,
+  Play,
+  RotateCcw,
+} from "lucide-react";
 import { Progress } from "@/components/Progress";
 import { Checkbox } from "@/components/Checkbox";
 
@@ -206,6 +213,21 @@ function CurrentChallengeAudio(props: CurrentChallengeAudioProps) {
       setIsPlaying(false);
     }
   }
+
+  function handleRestartAudio() {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.currentTime = 0;
+    setCurrentTime(0);
+
+    if (!isPlaying) {
+      return;
+    }
+
+    void audio.play();
+  }
+
   return (
     <div className="rounded-24 border border-border-soft bg-background/60 p-24">
       <div className="flex flex-col gap-16">
@@ -220,19 +242,31 @@ function CurrentChallengeAudio(props: CurrentChallengeAudioProps) {
             </p>
           </div>
 
-          <Button
-            type="button"
-            kind="inverse"
-            size="icon"
-            aria-label={isPlaying ? "Pausar audio" : "Reproducir audio"}
-            onClick={handleToggleAudio}
-          >
-            {isPlaying ? (
-              <Pause className="size-16" />
-            ) : (
-              <Play className="size-16" />
-            )}
-          </Button>
+          <div className="flex items-center gap-8">
+            <Button
+              type="button"
+              kind="inverse"
+              size="icon"
+              aria-label="Volver al inicio del audio"
+              onClick={handleRestartAudio}
+            >
+              <RotateCcw className="size-16" />
+            </Button>
+
+            <Button
+              type="button"
+              kind="inverse"
+              size="icon"
+              aria-label={isPlaying ? "Pausar audio" : "Reproducir audio"}
+              onClick={handleToggleAudio}
+            >
+              {isPlaying ? (
+                <Pause className="size-16" />
+              ) : (
+                <Play className="size-16" />
+              )}
+            </Button>
+          </div>
         </div>
 
         <audio
@@ -321,6 +355,7 @@ function CurrentChallengeVideoContainer(
           aria-label="Ver vídeo en pantalla completa"
           onClick={handleFullscreen}
           disabled={!isRevealed}
+          className="min-w-40 self-end"
         >
           <Expand className="size-16" />
         </Button>
